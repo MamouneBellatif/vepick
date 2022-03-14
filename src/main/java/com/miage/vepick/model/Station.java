@@ -2,6 +2,7 @@ package com.miage.vepick.model;
 import java.util.*;
 import javax.persistence.*;
 import lombok.Data;
+import lombok.*;
 
 @Data //Lombok (dépendance spring boot pour getters/setters)
 @Entity
@@ -13,7 +14,7 @@ public class Station {
 	private int id;
 
 	@Column
-	private String adresse;
+	@Setter @Getter private String adresse;
 
 	// @Enumerated(EnumType.STRING)
 	// private TrajetsCourants trajets;
