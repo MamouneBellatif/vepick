@@ -40,7 +40,7 @@ public class MainController{
         Station station = new Station();
         station.setAdresse(adresse);
         this.stationRep.save(station);
-        return "insertion: "+adresse;
+        return "insertion: "+adresse;//test
     }
 
     @ResponseBody
