@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.miage.vepick.model.Station;
 import com.miage.vepick.repository.StationRepository;
+import com.miage.vepick.service.StationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import lombok.*;
 @Controller
 public class MainController{
 
+    // @Autowired
+    // private StationRepository stationRep;
     @Autowired
-    private StationRepository stationRep;
+    private StationService stationService;
 
     private static final String[] ADRESSES = new String[]{"grenoble","lyon","marrakech"};
 
@@ -39,14 +42,16 @@ public class MainController{
         String adresse=ADRESSES[random];
         Station station = new Station();
         station.setAdresse(adresse);
-        this.stationRep.save(station);
+        // this.stationRep.save(station);
+        this.stationService.saveStation(station);
         return "insertion: "+adresse;//test
     }
 
     @ResponseBody
     @RequestMapping("/showAllStations")
     public String showAllStations(){
-        Iterable<Station> stations = this.stationRep.findAll();
+        // Iterable<Station> stations = this.stationRep.findAll();
+        Iterable<Station> stations = this.stationService.getStations();
         String html = "";
         for (Station station : stations) {
             html += station +"<br>";
@@ -58,7 +63,8 @@ public class MainController{
     @RequestMapping("/deleteAllStations")
     public String deleteAllEmployee() {
 
-        this.stationRep.deleteAll();
+        // this.stationRep.deleteAll();
+        this.stationService.deleteAllStations();
         return "stations supprimés!";
     }
 }
