@@ -4,7 +4,7 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.*;
 
-@Data //Lombok (dépendance spring boot pour getters/setters)
+@Data //Lombok (dépendance spring boot pour getters/setters)//
 @Entity
 @Table(name="bornette")
 public class Bornette {
