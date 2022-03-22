@@ -1,6 +1,10 @@
 package com.miage.vepick.model;
 import java.util.*;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import lombok.*;
 
@@ -13,10 +17,9 @@ public class Bornette {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-    @Setter @Getter private boolean libre; //velo present ou pas
+    private boolean libre; //velo present ou pas
 
-	@Setter @Getter private String adresse;
-
+    
     @Enumerated(EnumType.STRING)
     private EtatEnum etat;
 
@@ -26,8 +29,25 @@ public class Bornette {
 	@OneToMany(mappedBy="lieuLocation")
 	private List<Location> locations;
 
+	// @JsonIgnore //pour eviter stackoverflow lors d'un toString
 	@ManyToOne
 	private Station station;
+
+	public Bornette(){//nécessaire en cas d'autres construceurs
+		super();
+	}
+
+    public Bornette(Station station){
+        etat=etat.ok;
+        this.station=station;
+    }
+
+
 	
+
+	@Override
+	public String toString() {
+		return "Bornette id: "+this.id;
+	}
 
 }

@@ -17,7 +17,12 @@ public class Location {
 	@Column
 	private Date date;
 
+	@ManyToOne
 	private Client locataire;
+
+    private String password;
+
+    private boolean enCours;
  
 	@OneToOne(mappedBy="location")
 	private Velo velo;

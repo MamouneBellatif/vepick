@@ -28,4 +28,7 @@ public class Station {
 	@OneToMany(mappedBy="station")
 	private List<Bornette> bornettes;
 
+	public void addBornette(Bornette bornette){
+		this.bornettes.add(bornette);
+	}
 }

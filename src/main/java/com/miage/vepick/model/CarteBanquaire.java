@@ -12,12 +12,13 @@ public class CarteBanquaire {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	@Column(nullable=false)
+	// @Column(nullable=false)
 	@OneToMany(mappedBy="cbUtilisee")
 	private List<Client> utilisateurs;
 
-	@Column(nullable=false)
-	@OneToMany
+	// @Column(nullable=false)
+	// @OneToMany
+	@OneToOne
 	private Client proprietaire;
 	
 

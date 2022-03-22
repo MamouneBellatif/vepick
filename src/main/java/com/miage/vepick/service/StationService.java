@@ -1,5 +1,7 @@
 package com.miage.vepick.service;
 
+import java.util.Optional;
+
 import com.miage.vepick.model.Station;
 import com.miage.vepick.repository.StationRepository;
 
@@ -14,6 +16,10 @@ public class StationService {
 
     @Autowired
     private StationRepository stationRep;
+
+    public Optional<Station> getStationById(Long id){
+        return stationRep.findById(id);
+    }
 
     public Station saveStation(Station station){
         Station savedStation = stationRep.save(station);
@@ -30,5 +36,10 @@ public class StationService {
 
     public void deleteAllStations(){
         stationRep.deleteAll();
+    }
+
+    //verifie que station existe
+    public boolean stationExists(Long id){
+        return stationRep.existsById(id);
     }
 }
