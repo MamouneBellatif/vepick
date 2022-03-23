@@ -7,9 +7,11 @@ import java.util.Random;
 
 import com.miage.vepick.model.Bornette;
 import com.miage.vepick.model.Station;
+import com.miage.vepick.model.Velo;
 import com.miage.vepick.repository.StationRepository;
 import com.miage.vepick.service.BornetteService;
 import com.miage.vepick.service.StationService;
+import com.miage.vepick.service.VeloService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class MainController{
 
     @Autowired
     private BornetteService bornetteService;
+
+    @Autowired
+    private VeloService veloService;
     private static final String[] ADRESSES = new String[]{"grenoble","lyon","marrakech"};
 
     @ResponseBody
@@ -49,19 +54,26 @@ public class MainController{
 
         Station station = new Station();
         Bornette bornette = new Bornette(station);
-        
-        station.setBornettes(new ArrayList<Bornette>());
+        Bornette bornette2 = new Bornette(station);
+        Velo velo = new Velo();
+        Velo velo2 = new Velo();
+        velo.setBornette(bornette);
+        velo2.setBornette(bornette2);
+        // station.setBornettes(new ArrayList<Bornette>());
+        // station.addBornette(bornette2);
 
         station.setAdresse(adresse);
-        bornette.setStation(station);
-        bornette.setLibre(true);
+        // bornette.setStation(station);
+        // bornette.setLibre(true);
 
         // this.stationRep.save(station);
 
         
         this.stationService.saveStation(station);
         this.bornetteService.saveBornette(bornette);
-
+        this.bornetteService.saveBornette(bornette2);
+        this.veloService.saveVelo(velo);
+        this.veloService.saveVelo(velo2);
         
         return "insertion: "+adresse;//test
     }
@@ -76,7 +88,9 @@ public class MainController{
             html += station +"<br>";
             List<Bornette> bornettes = this.bornetteService.getBornettesByStation(station);
             for (Bornette bornette : bornettes) {
-                html += bornette + "(bornette) <br>";
+                Velo velo = this.veloService.getVeloByBornette(bornette);
+                html +="    "+bornette + "(bornette) station:"+bornette.getStation().getId()+" <br>";
+                html += "       "+velo + "(velo)"+"<br>";
             }
         }
         return html;

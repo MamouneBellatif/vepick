@@ -30,4 +30,12 @@ public class Velo {
 	@OneToOne
 	private Location location;
 
+	// public void setBornette(Bornette bornette){
+	// 	this.bornette=bornette;
+	// 	bornette.setLibre(false);
+	// }
+
+	public String toStrig(){
+		return "velo n"+this.id;
+	}
 }

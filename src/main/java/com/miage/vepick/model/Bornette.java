@@ -47,7 +47,7 @@ public class Bornette {
 
 	@Override
 	public String toString() {
-		return "Bornette id: "+this.id;
+		return "Bornette id: "+this.id +"|bornette.velo.id"+this.veloStationnee.getId();
 	}
 
 }
