@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 //Interface qui implemente crudRepository pour l'acces au données
 @Repository
-public interface CarteBanquaireRepository extends CrudRepository<Station, Long>{
+public interface CarteBanquaireRepository extends CrudRepository<CarteBanquaire, Long>{
     
 }

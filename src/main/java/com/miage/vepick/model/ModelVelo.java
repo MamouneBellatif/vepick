@@ -5,9 +5,11 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.*;
 
+
+@Data
 @Entity
 @Table(name="model")
-public class Model {
+public class ModelVelo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -17,4 +19,17 @@ public class Model {
 
 	@Column
 	private double prix;
+
+	public ModelVelo(){
+		super();
+	}
+
+	public ModelVelo(String nom, double prix){
+		this.nom=nom;
+		this.prix=prix;
+	}
+
+	public String toString(){
+		return nom;
+	}
 }

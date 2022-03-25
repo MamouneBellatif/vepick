@@ -6,10 +6,12 @@ import java.util.Optional;
 import java.util.Random;
 
 import com.miage.vepick.model.Bornette;
+import com.miage.vepick.model.ModelVelo;
 import com.miage.vepick.model.Station;
 import com.miage.vepick.model.Velo;
 import com.miage.vepick.repository.StationRepository;
 import com.miage.vepick.service.BornetteService;
+import com.miage.vepick.service.ModelService;
 import com.miage.vepick.service.StationService;
 import com.miage.vepick.service.VeloService;
 
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import org.springframework.ui.Model;
 import lombok.*;
 @Controller
 public class MainController{
@@ -32,11 +36,23 @@ public class MainController{
 
     @Autowired
     private VeloService veloService;
+
+    @Autowired
+    private ModelService modelService;
+    
     private static final String[] ADRESSES = new String[]{"grenoble","lyon","marrakech"};
 
-    @ResponseBody
+    
     @RequestMapping("/")
-    public String home(){
+    public String home(Model model){
+        Iterable<Station> stations = this.stationService.getStations();
+        model.addAttribute("stations", stations);
+        return "home";
+    }
+
+    @ResponseBody
+    @RequestMapping("/test")
+    public String test(){
         String html = "";
         html += "<ul>";
         html += " <li><a href='/testInsert'>Test Insert</a></li>";
@@ -46,6 +62,8 @@ public class MainController{
         return html;
     }
 
+
+    ModelVelo model = new ModelVelo("model-test", 20.0);
     @ResponseBody
     @RequestMapping("/testInsert")
     public String testInsert(){
@@ -55,8 +73,8 @@ public class MainController{
         Station station = new Station();
         Bornette bornette = new Bornette(station);
         Bornette bornette2 = new Bornette(station);
-        Velo velo = new Velo();
-        Velo velo2 = new Velo();
+        Velo velo = new Velo(model);
+        Velo velo2 = new Velo(model);
         velo.setBornette(bornette);
         velo2.setBornette(bornette2);
         // station.setBornettes(new ArrayList<Bornette>());
@@ -68,7 +86,7 @@ public class MainController{
 
         // this.stationRep.save(station);
 
-        
+        this.modelService.saveModel(model);
         this.stationService.saveStation(station);
         this.bornetteService.saveBornette(bornette);
         this.bornetteService.saveBornette(bornette2);
@@ -96,6 +114,8 @@ public class MainController{
         return html;
     }
 
+
+    
     
     @ResponseBody
     @RequestMapping("/deleteAllStations")
@@ -117,6 +137,15 @@ public class MainController{
             html += "n"+station.getId()+": "+ station +"<br>";
         }
         Optional<Station> station = stationService.getStationById(id);
+
+        //votre numero d'util (form)
+        //if util exists sinon creer nouveau
+        //location unique, liste des station -> clique sur station, premier velo dispo, nouvelle llocation
+        //generation mdp et assignation mdp a client et a location,
+        //enleve velo de bornette
+
+        //reettre velo, cliqu estation,, premiere bornette libre, assigne station si mdp juste
+        //fin location
         return null;
     }
 

@@ -13,7 +13,7 @@ public class Velo {
 	private int id;
 	
 	@ManyToOne
-	private Model model;
+	private ModelVelo model;
 
 	@Column
 	private Date dateService;
@@ -34,8 +34,15 @@ public class Velo {
 	// 	this.bornette=bornette;
 	// 	bornette.setLibre(false);
 	// }
+	public Velo(){
+		super();
+	}
+
+	public Velo(ModelVelo model){
+		this.model=model;
+	}
 
 	public String toStrig(){
-		return "velo n"+this.id;
+		return "velo n"+this.id+" model: "+this.model;
 	}
 }

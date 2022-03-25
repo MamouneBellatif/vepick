@@ -1,0 +1,42 @@
+body {
+    margin: auto;
+    font-family: "Open sans",sans-serif;
+}
+
+h1, h2{
+    font-weight:100;
+    text-align: center;
+    margin:0;
+    padding:0;
+    font-size: 40px;
+  }
+
+/* pour le tableau, bordure en un seul trait, aussi large ue la fenetre */
+table{
+    border:1;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Bordure  grise et espacement des cellules*/
+td, th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* alterne les couleurs du tableau */
+tr:nth-child(even){background-color: #f2f2f2;} 
+
+/* souris au dessus d'un element du tableau */
+tr:hover {background-color: #ddd;}
+
+/* Première ligne */
+th{
+    background-color: #9acd32;
+    color: white;
+}
+
+/* centrage des cellules */
+tr{
+    text-align: center; 
+}
