@@ -22,4 +22,7 @@ public class ModelService {
         return modelRepository.save(model);
     }
 
+    public Iterable<ModelVelo> getAllModels(){
+       return modelRepository.findAll();
+    }
 }

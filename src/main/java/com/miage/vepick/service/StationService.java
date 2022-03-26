@@ -17,7 +17,8 @@ public class StationService {
     @Autowired
     private StationRepository stationRep;
 
-    public Optional<Station> getStationById(Long id){
+    public Optional<Station> getStationById(int id){
+    // public Optional<Station> getStationById(Long id){
         return stationRep.findById(id);
     }
 
@@ -39,7 +40,8 @@ public class StationService {
     }
 
     //verifie que station existe
-    public boolean stationExists(Long id){
+    public boolean stationExists(int id){
+    // public boolean stationExists(Long id){
         return stationRep.existsById(id);
     }
 }
