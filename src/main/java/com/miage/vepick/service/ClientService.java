@@ -22,7 +22,5 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    // public Client getClientByBornette(Bornette bornette){
-    //     return clientRepository.findByBornette(bornette);
-    // }
+    
 }

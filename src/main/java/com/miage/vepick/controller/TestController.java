@@ -99,9 +99,12 @@ public class TestController{
             html += station +"<br>";
             List<Bornette> bornettes = this.bornetteService.getBornettesByStation(station);
             for (Bornette bornette : bornettes) {
-                Velo velo = this.veloService.getVeloByBornette(bornette);
-                html +="    "+bornette + "(bornette) station:"+bornette.getStation().getId()+" <br>";
-                html += "       "+velo + "(velo)"+"<br>";
+                Optional<Velo> veloOpt = this.veloService.getVeloByBornette(bornette);
+                if(veloOpt.isPresent()) {
+                    Velo velo = veloOpt.get();
+                    html +="    "+bornette + "(bornette) station:"+bornette.getStation().getId()+" <br>";
+                    html += "       "+velo + "(velo)"+"<br>";
+                }                
             }
         }
         return html;

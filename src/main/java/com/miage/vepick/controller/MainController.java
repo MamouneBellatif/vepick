@@ -11,6 +11,7 @@ import com.miage.vepick.model.Station;
 import com.miage.vepick.model.Velo;
 import com.miage.vepick.repository.StationRepository;
 import com.miage.vepick.service.BornetteService;
+import com.miage.vepick.service.ClientService;
 import com.miage.vepick.service.ModelService;
 import com.miage.vepick.service.StationService;
 import com.miage.vepick.service.VeloService;
@@ -43,9 +44,12 @@ public class MainController{
     
     private static final String[] ADRESSES = new String[]{"grenoble","lyon","marrakech"};
 
+    @Autowired
+    private ClientService clientServce;
     
     @GetMapping("/")
     public String home(Model model){
+        
         Iterable<Station> stations = this.stationService.getStations();
         model.addAttribute("stations", stations);
         return "home";

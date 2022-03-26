@@ -24,5 +24,9 @@ public class LocationService {
         Location savedLocation =locationRep.save(location);
         return location;
    }
+
+   public Iterable<Location> getAllLocations(){
+        return locationRep.findAll();
+   }
 }
 

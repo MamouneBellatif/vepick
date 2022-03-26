@@ -22,7 +22,9 @@ public class VeloService {
         return veloRepository.save(velo);
     }
 
-    public Velo getVeloByBornette(Bornette bornette){
+    public Optional<Velo> getVeloByBornette(Bornette bornette){
         return veloRepository.findByBornette(bornette);
     }
+
+   
 }

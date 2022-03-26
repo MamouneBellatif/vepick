@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <link th:href="@{/styles/style.css}" rel="stylesheet" />        <meta charset="UTF-8">
+        <title>Vepick Web Application</title>
+    </head>
+    <body>
+        <!-- <h1 th:text="${found}"></h1> -->
+            <h2 th:if="${success}">Location effectuée</h2>
+            <table th:if="${success}==true">
+                <thead>
+                    <tr>
+                        <th>velo</th>
+                        <th>date</th>
+                        <th>votre mot de passe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span th:text="${velo}">velo</span></td>
+                        <td><span th:text="${location.date}">date</span></td>
+                        <td><span th:text="${location.password}">mot de passe</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        <h2 th:unless="${success}">Le modèle souhaité est indisponible en station, essayez une autre station</h2>
+        <h2><a th:href="@{/station/{id}(id=${station.id})}">retour</a></h2>
+    </body>
+</html>
