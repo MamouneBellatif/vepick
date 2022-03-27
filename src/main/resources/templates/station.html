@@ -26,7 +26,7 @@
                     <td><span th:text="${bornette.id}">numero bornette</span></td>
                     <td><span th:text="${bornette.libre}">libre</span></td>
                     <td><span th:text="${bornette.veloStationnee}">velo</span></td>
-                    <td><span th:text="${bornette.veloStationnee.etat}">etat velo</span></td>
+                    <td><span th:text="${bornette?.veloStationnee?.etat}">etat velo</span></td>
                     <!-- <td><a th:href="@{/station/{id}(id=${station.id})}">Se connecter </a></td> -->
                 </tr>
             </tbody>
@@ -39,27 +39,28 @@
         <h3><a th:href="@{/station/{id}/fin-location(id=${station.id})}">Rendre un velo</a></h3> -->
 
         <h2>Vos locations en cours:</h2>
-        <p th:if="${locations.empty}">
-            Vous n'avez pas encore effectué de location
+        <p th:if="${liveLocations.empty}">
+            Vous n'avez pas de location en cours
         </p>
         <table>
-                <tr th:each="location : ${locations}" th:if="${location.enCours}==true">
+                <tr th:each="location : ${liveLocations}" th:if="${location.enCours}==true">
                     <!-- <tr th:each="location : ${locations}" th:if="${location.enCours}==true"> -->
                     <td><span th:text="${location.velo}">velo</span></td>
                     <td><span th:text="${location.date}">date</span></td>
                     <td>
                         <a th:href="@{/station/{id}/fin-location/{idLocation}(id=${station.id}, idLocation=${location.id})}">Rendre le velo</a></td>
                         
-                    <td><a th:href="@{/station/{id}/velo/{veloId}/panne(id=${station.id},veloId=${location.velo.id})}">Signaler panne</a></td>
+                    <td th:if="${location.velo.etat == T(com.miage.vepick.model.EtatEnum).OK}"><a th:if="${location.velo.etat == T(com.miage.vepick.model.EtatEnum).OK}"th:href="@{/station/{id}/velo/{veloId}/panne(id=${station.id},veloId=${location.velo.id})}">Signaler panne</a></td>
+                    <td><span th:unless="${location.velo.etat == T(com.miage.vepick.model.EtatEnum).OK}">panne signalée</span></td>
                  </tr>
         </table>
         <br>
         <h2>Vos locations passées:</h2>
-        <p th:if="${locations.empty}">
+        <p th:if="${oldLocations.empty}">
             Vous n'avez pas encore effectué de location
         </p>
         <table>
-                <tr th:each="location : ${locations}" th:if="${location.enCours}==false">
+                <tr th:each="location : ${oldLocations}" th:if="${location.enCours}==false">
                     <!-- <tr th:each="location : ${locations}" th:if="${location.enCours}==true"> -->
                     <td><span th:text="${location.velo}">velo</span></td>
                     <td><span th:text="${location.dateFin}">date</span></td>

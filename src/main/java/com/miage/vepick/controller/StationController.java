@@ -1,6 +1,7 @@
 package com.miage.vepick.controller;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -59,6 +60,19 @@ public class StationController {
             model.addAttribute("bornettes", bornettes);
             model.addAttribute("models", models);
             model.addAttribute("locations", locations);
+            ArrayList<Location> liveLocations = new ArrayList<Location>();
+            ArrayList<Location> oldLocations = new ArrayList<Location>();
+            for(Location location : locations){
+                if(location.isEnCours()){
+                    liveLocations.add(location);
+                }
+                else{
+                    oldLocations.add(location);
+                }
+            }
+            model.addAttribute("liveLocations", liveLocations);
+            model.addAttribute("oldLocations", oldLocations);
+            
         }
         return "station";
     }

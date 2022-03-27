@@ -42,9 +42,6 @@ public class LocationController {
     private BornetteService bornetteService;
 
     @Autowired
-    private ModelService modelService;
-
-    @Autowired
     private VeloService veloService;
 
     @Autowired

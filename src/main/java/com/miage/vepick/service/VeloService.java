@@ -18,6 +18,12 @@ public class VeloService {
 
     @Autowired
     private VeloRepository veloRepository;
+
+    public Optional<Velo> getVeloById(int id){
+        return veloRepository.findById(id);
+    }
+
+    
     
     public Velo saveVelo(Velo velo){
         return veloRepository.save(velo);
