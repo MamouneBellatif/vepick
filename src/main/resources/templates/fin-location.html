@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <link th:href="@{/styles/style.css}" rel="stylesheet" />        <meta charset="UTF-8">
+        <title>Vepick Web Application</title>
+        <style>
+            body {
+                padding-top: 50px;
+            }
+            
+            .special {
+                padding-top: 50px;
+            }
+            </style>
+    </head>
+    <body>
+        <!-- <h1 th:text="${found}"></h1> -->
+        
+            <h2 th:if="${success}">Bornette libre trouvée</h2>
+            <!-- <table>
+                <th>bornette</th>
+            </table> -->
+            <table th:if="${success}==true">
+                <thead>
+                    <tr>
+                        <th>velo</th>
+                        <th>date</th>
+                        <th>votre mot de passe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span th:text="${location.velo}">velo</span></td>
+                        <td><span th:text="${location.date}">date</span></td>
+                        <td> <form method="post" th:action="@{/station/{id}/fin-location/{idLocation}/validate(id=${station.id}, idLocation=${location.id})}">
+                            <label for="inputPassword5" class="form-label">Password</label>
+                            <input type="text" th:value="${password}" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                            <input type="submit"/>
+                            <div id="passwordHelpBlock" class="form-text">
+                                Entrez le mot de passe qui vous a été fourni
+                            </div>
+                        </form></td>
+                    </tr>
+                </tbody>
+            </table>
+           
+
+        <h2 th:unless="${success}">Aucune place libre dans cette station</h2>
+        <h2><a th:href="@{/station/{id}(id=${station.id})}">retour</a></h2>
+    </body>
+</html>

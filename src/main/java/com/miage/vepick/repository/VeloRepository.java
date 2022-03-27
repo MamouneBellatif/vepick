@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VeloRepository extends CrudRepository<Velo, Integer>{
     public Optional<Velo> findByBornette(Bornette bornette);
+    public Optional<Velo> findByLocations(Location location);
+
 }

@@ -19,6 +19,9 @@ public class Location {
 	@Column
 	private Date date;
 
+	@Column
+	private Date dateFin;
+
 	@ManyToOne
 	private Client locataire;
 
@@ -26,7 +29,7 @@ public class Location {
 
     private boolean enCours;
  
-	@OneToOne(mappedBy="location")
+	@ManyToOne
 	private Velo velo;
 
 	@ManyToOne
@@ -43,4 +46,14 @@ public class Location {
 		this.password=password;
 	}
 
+	public String toString(){
+		return "id location"+this.id+"date: "+date;
+	}
+
+	public void setEnCours(boolean enCours){
+		System.out.println("setEnCours");
+		this.enCours=enCours;
+	}
+
+	
 }

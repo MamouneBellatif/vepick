@@ -1,5 +1,7 @@
 package com.miage.vepick.service;
 
+import java.util.Optional;
+
 import com.miage.vepick.model.Location;
 import com.miage.vepick.model.Station;
 import com.miage.vepick.repository.LocationRepository;
@@ -28,5 +30,13 @@ public class LocationService {
    public Iterable<Location> getAllLocations(){
         return locationRep.findAll();
    }
+
+   public Optional<Location> getLocationById(int id){
+        return locationRep.findById(id);
+   }
+
+//    public Optional<Velo> getVelo(int id){
+//         return locationRep.findVeloById(id);
+//    }
 }
 

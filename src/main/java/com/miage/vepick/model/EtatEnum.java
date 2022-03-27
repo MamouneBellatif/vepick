@@ -7,7 +7,7 @@ import java.time.*;
 
 
 public enum EtatEnum {
-	ok,
-	hs;
+	OK,
+	HS;
 
 }

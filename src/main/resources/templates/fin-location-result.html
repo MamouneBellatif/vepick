@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <link th:href="@{/styles/style.css}" rel="stylesheet" />        <meta charset="UTF-8">
+        <title>Vepick Web Application</title>
+        <style>
+            body {
+                padding-top: 50px;
+            }
+            
+            .special {
+                padding-top: 50px;
+            }
+            </style>
+    </head>
+    <body>
+        <!-- <h1 th:text="${found}"></h1> -->
+        
+            <h2 th:if="${passwordOk}">Velo rendu avec succès</h2>
+
+        <h2 th:unless="${passwordOk}">Mauvais mot de passe</h2>
+        <!-- <h2><a th:href="@{/station/{id}(id=${station.id})}">retour</a></h2> -->
+        <h2><a th:href="@{/station/{id}(id=${stationId})}">retour</a></h2>
+    </body>
+</html>

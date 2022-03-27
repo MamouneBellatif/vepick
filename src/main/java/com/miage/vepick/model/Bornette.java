@@ -38,7 +38,7 @@ public class Bornette {
 	}
 
     public Bornette(Station station){
-        etat=etat.ok;
+        this.etat=EtatEnum.OK;
         this.station=station;
     }
 

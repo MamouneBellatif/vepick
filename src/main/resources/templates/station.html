@@ -15,6 +15,7 @@
                     <th>numero bornette</th>
                     <th>libre</th>
                     <th>velo</th>
+                    <th>etat velo</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,18 +26,19 @@
                     <td><span th:text="${bornette.id}">numero bornette</span></td>
                     <td><span th:text="${bornette.libre}">libre</span></td>
                     <td><span th:text="${bornette.veloStationnee}">velo</span></td>
+                    <td><span th:text="${bornette.veloStationnee.etat}">etat velo</span></td>
                     <!-- <td><a th:href="@{/station/{id}(id=${station.id})}">Se connecter </a></td> -->
                 </tr>
             </tbody>
         </table>
         <h3>Pour louer un velo, cliquez sur le modèle souhaité</h3>
             <ul>
-                <li th:each="modele : ${models}"><a th:href="@{/station/{id}/new-location/{nomModel}(id=${station.id}, nomModel=${modele.nom})}"><span th:text="${modele.nom}"></span></li>
+                <li th:each="modele : ${models}"><a th:href="@{/station/{id}/new-location/{nomModel}(id=${station.id}, nomModel=${modele.nom})}"><span th:text="${modele.nom}"></span></a></li>
             </ul>
-        <h3><a th:href="@{/station/{id}/location(id=${station.id})}">Louer un velo</a></h3>
-        <h3><a th:href="@{/station/{id}/fin-location(id=${station.id})}">Rendre un velo</a></h3>
+        <!-- <h3><a th:href="@{/station/{id}/location(id=${station.id})}">Louer un velo</a></h3>
+        <h3><a th:href="@{/station/{id}/fin-location(id=${station.id})}">Rendre un velo</a></h3> -->
 
-        <h2>Vos locations:</h2>
+        <h2>Vos locations en cours:</h2>
         <p th:if="${locations.empty}">
             Vous n'avez pas encore effectué de location
         </p>
@@ -45,7 +47,23 @@
                     <!-- <tr th:each="location : ${locations}" th:if="${location.enCours}==true"> -->
                     <td><span th:text="${location.velo}">velo</span></td>
                     <td><span th:text="${location.date}">date</span></td>
-                        <!-- <td><a th:href="@{/station/{id}/fin-location/{idLocation}(id=${station.id}, idLocation=${location.id})}">Rendre un velo</a></td> -->
+                    <td>
+                        <a th:href="@{/station/{id}/fin-location/{idLocation}(id=${station.id}, idLocation=${location.id})}">Rendre le velo</a></td>
+                        
+                    <td><a th:href="@{/station/{id}/velo/{veloId}/panne(id=${station.id},veloId=${location.velo.id})}">Signaler panne</a></td>
+                 </tr>
+        </table>
+        <br>
+        <h2>Vos locations passées:</h2>
+        <p th:if="${locations.empty}">
+            Vous n'avez pas encore effectué de location
+        </p>
+        <table>
+                <tr th:each="location : ${locations}" th:if="${location.enCours}==false">
+                    <!-- <tr th:each="location : ${locations}" th:if="${location.enCours}==true"> -->
+                    <td><span th:text="${location.velo}">velo</span></td>
+                    <td><span th:text="${location.dateFin}">date</span></td>
+                    <!-- <td><a th:href="@{/station/{id}/fin-location/{idLocation}(id=${station.id}, idLocation=${location.id})}">Rendre le velo</a></td> -->
                  </tr>
         </table>
         <br>

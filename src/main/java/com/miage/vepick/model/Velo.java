@@ -3,6 +3,7 @@ import java.util.*;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.*;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -27,8 +28,8 @@ public class Velo {
 	@OneToOne
 	private Bornette bornette;
 
-	@OneToOne
-	private Location location;
+	@OneToMany(mappedBy="velo",cascade = CascadeType.ALL)
+	private List<Location> locations;
 
 	// public void setBornette(Bornette bornette){
 	// 	this.bornette=bornette;
@@ -40,9 +41,17 @@ public class Velo {
 
 	public Velo(ModelVelo model){
 		this.model=model;
+		this.dateService=new Date(System.currentTimeMillis());
+		this.enMaintenance=false;
+		this.etat=EtatEnum.OK;
+		this.locations=new ArrayList<>();
 	}
 
-	public String toStrig(){
+	public String toString(){
 		return "velo n"+this.id+" model: "+this.model;
+	}
+
+	public void addLocation(Location location){
+		this.locations.add(location);
 	}
 }

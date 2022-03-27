@@ -3,6 +3,7 @@ package com.miage.vepick.service;
 import java.util.Optional;
 
 import com.miage.vepick.model.Bornette;
+import com.miage.vepick.model.Location;
 import com.miage.vepick.model.Station;
 import com.miage.vepick.model.Velo;
 import com.miage.vepick.repository.VeloRepository;
@@ -24,6 +25,10 @@ public class VeloService {
 
     public Optional<Velo> getVeloByBornette(Bornette bornette){
         return veloRepository.findByBornette(bornette);
+    }
+
+    public Optional<Velo> getVeloByLocation(Location location){
+        return veloRepository.findByLocations(location);
     }
 
    

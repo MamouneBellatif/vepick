@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface LocationRepository extends CrudRepository<Location, Long> {
+public interface LocationRepository extends CrudRepository<Location, Integer> {
     
 }
