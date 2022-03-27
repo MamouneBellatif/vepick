@@ -64,6 +64,7 @@
                     <!-- <tr th:each="location : ${locations}" th:if="${location.enCours}==true"> -->
                     <td><span th:text="${location.velo}">velo</span></td>
                     <td><span th:text="${location.dateFin}">date</span></td>
+                    <!-- <td>loué a <span th:text="${location.lieuLocation.station.adresse}">loué a </span></td> -->
                     <!-- <td><a th:href="@{/station/{id}/fin-location/{idLocation}(id=${station.id}, idLocation=${location.id})}">Rendre le velo</a></td> -->
                  </tr>
         </table>

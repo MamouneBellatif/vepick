@@ -165,6 +165,8 @@ public class LocationController {
             model.addAttribute("stationId", station.getId());
             System.out.println("station= "+station.getId());
             model.addAttribute("success",found);
+            // System.out.println("loué a "+location.getLieuLocation().getStation());
+            // System.out.println("loué a "+location.getLieuLocation().getStation().getAdresse());
         }
         return "fin-location-result";
     }

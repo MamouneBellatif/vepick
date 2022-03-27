@@ -40,7 +40,7 @@ public class TestController{
     @Autowired
     private ModelService modelService;
     
-    private static final String[] ADRESSES = new String[]{"grenoble","lyon","marrakech"};
+    private static final String[] ADRESSES = new String[]{"campus","centre ville","gare", "mairie","stade","jardin de ville","alsace-lorraine"};
 
 
     @ResponseBody
@@ -56,18 +56,24 @@ public class TestController{
     }
 
 
-    ModelVelo model = new ModelVelo("model-test", 20.0);
+    ModelVelo model = new ModelVelo("Btwin", 20.0);
+    ModelVelo model2= new ModelVelo("Van Rysel", 30.0);
+    ModelVelo model3= new ModelVelo("laPierre", 10.0);
+
+    ModelVelo[] MODELS = new ModelVelo[]{model, model2, model3};
     @ResponseBody
-    @RequestMapping("/testInsert")
+    @RequestMapping("/populate")
     public String testInsert(){
-        int random = new Random().nextInt(3);
+        int random = new Random().nextInt(7);
         String adresse=ADRESSES[random];
 
         Station station = new Station();
         Bornette bornette = new Bornette(station);
         Bornette bornette2 = new Bornette(station);
-        Velo velo = new Velo(model);
-        Velo velo2 = new Velo(model);
+        Bornette bornette3 = new Bornette(station);
+        bornette3.setLibre(true);
+        Velo velo = new Velo(MODELS[new Random().nextInt(3)]);
+        Velo velo2 = new Velo(MODELS[new Random().nextInt(3)]);
         velo.setBornette(bornette);
         velo2.setBornette(bornette2);
         // station.setBornettes(new ArrayList<Bornette>());
@@ -80,9 +86,12 @@ public class TestController{
         // this.stationRep.save(station);
 
         this.modelService.saveModel(model);
+        this.modelService.saveModel(model2);
+        this.modelService.saveModel(model3);
         this.stationService.saveStation(station);
         this.bornetteService.saveBornette(bornette);
         this.bornetteService.saveBornette(bornette2);
+        this.bornetteService.saveBornette(bornette3);
         this.veloService.saveVelo(velo);
         this.veloService.saveVelo(velo2);
         
