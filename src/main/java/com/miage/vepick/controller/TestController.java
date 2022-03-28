@@ -76,15 +76,7 @@ public class TestController{
         Velo velo2 = new Velo(MODELS[new Random().nextInt(3)]);
         velo.setBornette(bornette);
         velo2.setBornette(bornette2);
-        // station.setBornettes(new ArrayList<Bornette>());
-        // station.addBornette(bornette2);
-
         station.setAdresse(adresse);
-        // bornette.setStation(station);
-        // bornette.setLibre(true);
-
-        // this.stationRep.save(station);
-
         this.modelService.saveModel(model);
         this.modelService.saveModel(model2);
         this.modelService.saveModel(model3);

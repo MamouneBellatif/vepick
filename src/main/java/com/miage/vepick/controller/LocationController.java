@@ -48,8 +48,10 @@ public class LocationController {
     private LocationService locationService;
 
 
-    /*Creer une nouvelle location si la station possède le modèle souhaité t que le velo est ok
-    puis génère un mot de passe et l'envoie*/
+    /*Creer une nouvelle location si la station possède le modèle souhaité et que le velo est ok
+    puis génère un mot de passe et l'envoie au client et notifie ce dernier du succès de l'opération
+    la base de donnée est mis a jour en conséquant
+    */
     @GetMapping("/station/{id}/new-location/{nomModel}")
     public String newLocation(@PathVariable("id") int id, @PathVariable("nomModel") String nomModel, Model model){
         Optional<Station> stationOpt = stationService.getStationById(id);
@@ -87,6 +89,9 @@ public class LocationController {
         return "location";
     }
 
+    /*Lorsque le client veut rendre un vélo, cette foncition vérifie que 
+    une bornette est disponible, puis renvoie un formulaire pour rentrer le 
+    mot de passe correspondant a la location */
     @GetMapping("/station/{id}/fin-location/{idLocation}")
     public String finLocationForm(@PathVariable("id") int id, @PathVariable("idLocation") int idLocation, Model model){
         Optional<Station> stationOpt = stationService.getStationById(id);
@@ -119,6 +124,11 @@ public class LocationController {
         return "fin-location";
     }
 
+    /* Quand le client rentre le mot de passe dans le formulaire de retour de vélo,
+    cette fonction va vérifier que le mot de passe est le bon, le mot de passe est envoyé par
+    une requête POST, puis va mêtre a jour la base de donnée pour prendre en compte la fin
+    de la location, puis renvoie une page pour notifier l'utilisateur du succès ou
+    de l'échec du retour */
     @RequestMapping(value="/station/{id}/fin-location/{idLocation}/validate", method = RequestMethod.POST)
     public String finLocation(@RequestBody String password, @PathVariable("id") int id, @PathVariable("idLocation") int idLocation, Model model){
         System.out.println("mdp: "+password+"\n idstation: "+id+"\n idlocation: "+idLocation);
@@ -171,11 +181,15 @@ public class LocationController {
         return "fin-location-result";
     }
 
+    /*Cette fonction est une fonction utilitaire pour génerer un mot de passe aléatoire de 18
+    charactères alphanumériques. la géneration aéatoire n'est absolument pas sécurisée et sert 
+    d'exemple pour l'application
+    Fonction trouvée sur StackOverflow */
     private String generatePassword() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 18) { // length of the random string.
+        while (salt.length() < 18) { 
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }

@@ -44,9 +44,8 @@ public class VeloController {
     private VeloService veloService;
 
 
-
-
-    /*Signal panne de velo*/
+    /*Quand le client souhaire signaler la panne d'un vélo, cette fonction se charge de modifier 
+    l'entitée jpa et de mettre a jour la bdd et rediriger la client vers la page de la station*/
     @GetMapping("/station/{id}/velo/{veloId}/panne")
     public String panneVelo(@PathVariable("id") int stationId, @PathVariable("veloId") int veloId, Model model){
         Optional<Station> stationOpt = stationService.getStationById(stationId);
